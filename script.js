@@ -1,4 +1,4 @@
-const appScriptURL = 'https://script.google.com/macros/s/AKfycbzTQXVzEyMtZeemiIVuOSzRN6lag8Od-h4MTXcTQB0fmDtbYIj-dlxlA485FQFXpn9a/exec';
+const appScriptURL = 'https://script.google.com/macros/s/AKfycbx_eh9mkoaZkD73qozj5ckIu2IY0la-DjsBrlWv2kqh8gj5kmFTzDAaYBwzW-XLciGU1w/exec';
 const container = document.getElementById('survey-container');
 const nextBtn = document.getElementById('nextBtn');
 const prevBtn = document.getElementById('prevBtn');
@@ -41,75 +41,71 @@ function createQuestions() {
     {
       id: 'Q3',
       type: 'slider',
-      text: 'How comfortable do you feel with "Church Culture"?',
-      min: 0, max: 100
+      text: 'How comfortable do you feel with "LDS Culture"?',
+      min: 0, max: 99
     },
     {
       id: 'Q4',
+      type: 'multiple',
+      text: 'How Christ-Centered is LDS Culture?',
+      options: ['Very', 'Somewhat', 'Not']
+    },
+    {
+      id: 'Q5',
       type: 'multiple',
       text: 'Do you feel that you belong as part of the Ward Family?',
       options: ['Yes', 'Somewhat', 'No']
     },
     {
-      id: 'Q5',
-      type: 'multiple',
-      text: 'Do you feel significant conflict or tension in your Church experience?',
-      options: ['Yes', 'Somewhat', 'No']
-    },
-    {
       id: 'Q6',
       type: 'multiple',
-      text: 'How Christ-Centered is Church Culture?',
-      options: ['Very', 'Somewhat', 'Not']
+      text: 'Do you feel significant conflict or tension in your Church experience?',
+      options: ['Yes', 'No']
     },
     {
       id: 'Q7',
       type: 'ranking',
       text: 'Drag to order by how important these are to YOU (top = most important)',
       options: [
-        'Love and Care for the Poor and Needy',
-        'Love and Serve Others',
-        'Strive to be Christlike',
-        'Believe in and Follow Jesus Christ and His Teachings',
-        'Keep the Commandments',
-        'Live the Doctrine of Christ',
-        'Attend Meetings and Activities',
-        'Stay on the Covenant Path',
-        'Follow Church Leaders',
-        'Be Sealed in the Temple',
-        'Attend the Temple',
-        'Keep the Word of Wisdom',
-        'Serve a full-time mission',
-        'Dress and Groom Appropriately'
+        'Caring for the Poor',
+        'Ministering',
+        'Striving to be Christlike',
+        'Faith in Jesus Christ and His Atonement',
+        'Attending Meetings and Activities',
+        'Following Church Leaders',
+        'Covenants and Ordinances',
+        'Family History Work',
+        'Temple Attendance',
+        'Sharing the Gospel',
+        'Paying Tithing',
+        'Dress and Grooming Standards'
       ],
       keys: [
         'Q7a','Q7b','Q7c','Q7d','Q7e','Q7f','Q7g','Q7h',
-        'Q7i','Q7j','Q7k','Q7l','Q7m','Q7n'
+        'Q7i','Q7j','Q7k','Q7l'
       ]
     },
     {
       id: 'Q8',
       type: 'ranking',
-      text: 'Drag to order by how important you feel these are to "CHURCH CULTURE" (top = most important)',
+      text: 'Drag to order by how important you feel these are to "LDS CULTURE" (top = most important)',
       options: [
-        'Love and Care for the Poor and Needy',
-        'Love and Serve Others',
-        'Strive to be Christlike',
-        'Believe in and Follow Jesus Christ and His Teachings',
-        'Keep the Commandments',
-        'Live the Doctrine of Christ',
-        'Attend Meetings and Activities',
-        'Stay on the Covenant Path',
-        'Follow Church Leaders',
-        'Be Sealed in the Temple',
-        'Attend the Temple',
-        'Keep the Word of Wisdom',
-        'Serve a full-time mission',
-        'Dress and Groom Appropriately'
+        'Caring for the Poor',
+        'Ministering',
+        'Striving to be Christlike',
+        'Faith in Jesus Christ and His Atonement',
+        'Attending Meetings and Activities',
+        'Following Church Leaders',
+        'Covenants and Ordinances',
+        'Family History',
+        'Temple Attendance',
+        'Sharing the Gospel',
+        'Paying Tithing',
+        'Dress and Grooming Standards'
       ],
       keys: [
         'Q8a','Q8b','Q8c','Q8d','Q8e','Q8f','Q8g','Q8h',
-        'Q8i','Q8j','Q8k','Q8l','Q8m','Q8n'
+        'Q8i','Q8j','Q8k','Q8l'
       ]
     },
     {
@@ -167,15 +163,14 @@ function renderQuestion(index) {
     input.max = q.max;
     input.value = Math.floor((q.min + q.max) / 2);
     input.style.width = '100%';
-    input.oninput = () => responses[q.id] = input.value;
+    input.oninput = () => responses[q.id] = input.value/100.0;
     section.appendChild(input);
 
     const labelRow = document.createElement('div');
     labelRow.className = 'slider-label';
     labelRow.innerHTML = `<span>Not at all</span><span>Completely</span>`;
     section.appendChild(labelRow);
-
-    responses[q.id] = input.value;
+    responses[q.id] = input.value/100.0;
 
   } else if (q.type === 'text') {
     const textarea = document.createElement('textarea');
@@ -209,15 +204,15 @@ function renderQuestion(index) {
         const order = Array.from(list.children).map(li => li.getAttribute('data-original'));
         q.options.forEach((label, idx) => {
           const key = q.keys[idx];
-          const rank = order.indexOf(label) + 1;
-          responses[key] = rank;
+          const rank = order.indexOf(label);
+          responses[key] = 12 - rank;
         });
       }
     });
 
     q.options.forEach((label, idx) => {
       const key = q.keys[idx];
-      responses[key] = idx + 1;
+      responses[key] = 12 - idx;
     });
   }
 
