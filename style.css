@@ -1,0 +1,133 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  main {
+    max-width: 600px;
+    margin: auto;
+    padding: 2rem 1rem;
+    min-height: 300px;
+    position: relative;
+  }
+  
+  .question {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .question.exit {
+    opacity: 0 !important;
+    transform: translateY(20px) !important;
+  }
+  
+  .question.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  button.option {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 0.75rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  button.option:hover,
+  button.option.selected {
+    background-color: #0067c0;
+    color: white;
+    border-color: #0067c0;
+  }
+  
+  textarea {
+    width: 100%;
+    height: 120px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical;
+  }
+  
+  .ranking-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .ranking-list li {
+    background: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: grab;
+    transition: background 0.2s ease;
+  }
+  
+  #navigation {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  #navigation button {
+    background-color: #0067c0;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #navigation button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Progress Bar */
+  #progress-container {
+    width: 100%;
+    background-color: #eee;
+    height: 8px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #progress-bar {
+    width: 0%;
+    height: 8px;
+    background-color: #0067c0;
+    transition: width 0.3s ease;
+  }
+  
