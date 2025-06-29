@@ -119,24 +119,25 @@ function createQuestions() {
         text: 'Please provide any thoughts or comments below:'
       }
     ];
-  }
+}
 
 // ---- Rendering Logic ----
 function showStep(index) {
-    const currentSection = document.querySelector('.question');
-    if (currentSection) {
-      currentSection.classList.remove('active');
-      currentSection.classList.add('exit');
+    const oldSection = document.querySelector('.question');
+    if (oldSection) {
+      oldSection.classList.remove('active');
+      oldSection.classList.add('exit');
+  
       setTimeout(() => {
+        container.removeChild(oldSection);
         renderQuestion(index);
-      }, 300); // Duration matches CSS transition
+      }, 300); // match with CSS transition duration
     } else {
       renderQuestion(index);
     }
-  }
+}
   
-  function renderQuestion(index) {
-    container.innerHTML = '';
+function renderQuestion(index) {
     const q = questions[index];
     const section = document.createElement('section');
     section.className = 'question active';
@@ -229,10 +230,12 @@ function showStep(index) {
       }
   
     container.appendChild(section);
+  
     prevBtn.disabled = index === 0;
     nextBtn.textContent = index === questions.length - 1 ? 'Submit' : 'Next';
     updateProgressBar(index);
-  }
+}
+  
 
 // ---- Navigation ----
 nextBtn.onclick = () => {
