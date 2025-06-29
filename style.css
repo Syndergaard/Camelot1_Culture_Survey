@@ -34,7 +34,6 @@
     transform: translateY(20px) !important;
   }
   
-  
   h2 {
     font-size: 1.4rem;
     margin-bottom: 1rem;
@@ -75,6 +74,13 @@
     resize: vertical;
   }
   
+  .slider-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  
   .ranking-list {
     list-style: none;
     padding: 0;
@@ -90,6 +96,12 @@
     font-size: 1rem;
     cursor: grab;
     transition: background 0.2s ease;
+  }
+  
+  .rank-wrapper {
+    max-height: 75vh;
+    overflow-y: auto;
+    padding-right: 1rem;
   }
   
   #navigation {
