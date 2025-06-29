@@ -117,19 +117,11 @@ function createQuestions() {
 }
 
 function showStep(index) {
-  const oldSection = document.querySelector('.question');
-  if (oldSection) {
-    oldSection.classList.remove('active');
-    oldSection.classList.add('exit');
+  container.innerHTML = ''; // 🧼 Clear previous content (landing OR question)
 
-    setTimeout(() => {
-      container.removeChild(oldSection);
-      renderQuestion(index);
-    }, 300);
-  } else {
-    renderQuestion(index);
-  }
+  renderQuestion(index);
 }
+
 
 function renderQuestion(index) {
   const q = questions[index];
@@ -263,7 +255,44 @@ function submitSurvey() {
     });
 }
 
+// ---- Landing Page First ----
+function showLandingPage() {
+  container.innerHTML = `
+    <section class="landing active">
+      <h2>Welcome to the Ward Culture & Belonging Survey</h2>
+      <p>
+        This short survey is designed to help us better understand our experiences, values, and sense of belonging in the ward.
+        Responses are completely anonymous. 
+      </p>
+      <p>
+        <b>Note:</b> This survey is not about Church doctrine.
+        Instead, we are asking for your honest feelings and opinions about the attitudes, expectations, and social dynamics 
+        you observe and experience in everyday Church life — what people often refer to as “LDS culture.”
+        </p>
+      <button id="startBtn">Start Survey</button>
+    </section>
+  `;
+
+  document.getElementById('startBtn').onclick = () => {
+    createQuestions();
+    createProgressBar();
+    document.getElementById('progress-container').style.display = 'block';
+    prevBtn.style.display = 'inline-block';
+    nextBtn.style.display = 'inline-block';
+    currentStep = 0;
+    showStep(currentStep);
+  };
+
+  prevBtn.style.display = 'none';
+  nextBtn.style.display = 'none';
+  const progressBar = document.getElementById('progress-container');
+  if (progressBar) progressBar.style.display = 'none';
+}
+
+
+
 // ---- Initialize ----
-createQuestions();
-createProgressBar();
-showStep(currentStep);
+showLandingPage();
+// createQuestions();
+// createProgressBar();
+// showStep(currentStep);
