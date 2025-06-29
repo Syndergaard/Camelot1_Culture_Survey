@@ -43,7 +43,7 @@ function createQuestions() {
         id: 'Q3',
         type: 'slider',
         text: 'How comfortable do you feel with "Church Culture"? (0 = not at all, 5 = completely)',
-        min: 0, max: 5
+        min: 0, max: 100
       },
       {
         id: 'Q4',
@@ -168,10 +168,10 @@ function renderQuestion(index) {
         wrapper.style.gap = '1rem';
     
         const minLabel = document.createElement('span');
-        minLabel.textContent = q.min;
+        minLabel.textContent = "Not at all";
     
         const maxLabel = document.createElement('span');
-        maxLabel.textContent = q.max;
+        maxLabel.textContent = "Completely";
     
         const input = document.createElement('input');
         input.type = 'range';
