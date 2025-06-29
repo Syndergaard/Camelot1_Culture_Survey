@@ -228,6 +228,7 @@ function renderQuestion(index) {
 }
 
 nextBtn.onclick = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   if (currentStep < questions.length - 1) {
     currentStep++;
     showStep(currentStep);
@@ -237,6 +238,7 @@ nextBtn.onclick = () => {
 };
 
 prevBtn.onclick = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
   if (currentStep > 0) {
     currentStep--;
     showStep(currentStep);
